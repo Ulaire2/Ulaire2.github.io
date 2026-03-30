@@ -1375,14 +1375,14 @@ a:hover { opacity: 0.8; }
     <ul class="footer-links">
       <li><a href="https://tonecheck.cn" target="_blank">ToneCheck</a></li>
       <li><a href="#" target="_blank">GitHub</a></li>
-      <li><a href="/cdn-cgi/l/email-protection#593c34383035193c21383429353c773a3634">Email</a></li>
+      <li><a href="mailto:15536012188@163.com">Email</a></li>
     </ul>
     <p class="footer-copy">© 2025 [Your Name]. Built with purpose.</p>
   </div>
 </footer>
 
 <!-- ═══════════════ Scripts ═══════════════ -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // Scroll reveal animation
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -1392,4 +1392,15 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-document.querySelectorAll('.reveal').forEach(e
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+</script>
+
+</body>
+</html>
