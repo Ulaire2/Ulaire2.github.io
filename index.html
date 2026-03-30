@@ -1,1406 +1,1546 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio — [Your Name]</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-/* ══════════════════════════════════════
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — [Your Name]</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ══════════════════════════════════════
    CSS Variables — single source of truth
    ══════════════════════════════════════ */
-:root {
-  --bg-primary: #0f1117;
-  --bg-secondary: #161821;
-  --bg-card: #1c1f2b;
-  --bg-card-hover: #232738;
-  --text-primary: #e8e6e1;
-  --text-secondary: #9a978f;
-  --text-muted: #5c5a54;
-  --accent: #c9a96e;
-  --accent-dim: rgba(201, 169, 110, 0.15);
-  --accent-glow: rgba(201, 169, 110, 0.08);
-  --border: rgba(201, 169, 110, 0.12);
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body: 'Source Sans 3', 'Noto Sans SC', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --max-width: 1200px;
-}
+    :root {
+      --bg-primary: #0f1117;
+      --bg-secondary: #161821;
+      --bg-card: #1c1f2b;
+      --bg-card-hover: #232738;
+      --text-primary: #e8e6e1;
+      --text-secondary: #9a978f;
+      --text-muted: #5c5a54;
+      --accent: #c9a96e;
+      --accent-dim: rgba(201, 169, 110, 0.15);
+      --accent-glow: rgba(201, 169, 110, 0.08);
+      --border: rgba(201, 169, 110, 0.12);
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Source Sans 3', 'Noto Sans SC', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --max-width: 1200px;
+    }
 
-/* ══════════════════════════════════════
+    /* ══════════════════════════════════════
    Reset & Base
    ══════════════════════════════════════ */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-html {
-  scroll-behavior: smooth;
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent-dim) transparent;
-}
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-dim) transparent;
+    }
 
-body {
-  font-family: var(--font-body);
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: 1.7;
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-}
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
 
-::selection {
-  background: var(--accent);
-  color: var(--bg-primary);
-}
+    ::selection {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
 
-a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-a:hover { opacity: 0.8; }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
 
-/* ══════════════════════════════════════
+    a:hover {
+      opacity: 0.8;
+    }
+
+    /* ══════════════════════════════════════
    Navigation Bar
    ══════════════════════════════════════ */
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: 0 2rem;
-  backdrop-filter: blur(20px);
-  background: rgba(15, 17, 23, 0.8);
-  border-bottom: 1px solid var(--border);
-  transition: transform 0.4s var(--ease-out);
-}
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0 2rem;
+      backdrop-filter: blur(20px);
+      background: rgba(15, 17, 23, 0.8);
+      border-bottom: 1px solid var(--border);
+      transition: transform 0.4s var(--ease-out);
+    }
 
-.nav-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
-}
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
 
-.nav-logo {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  letter-spacing: 0.02em;
-}
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
 
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-}
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
 
-.nav-links a {
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition: color 0.3s;
-  position: relative;
-}
+    .nav-links a {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
 
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--accent);
-  transition: width 0.3s var(--ease-out);
-}
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s var(--ease-out);
+    }
 
-.nav-links a:hover {
-  color: var(--accent);
-  opacity: 1;
-}
+    .nav-links a:hover {
+      color: var(--accent);
+      opacity: 1;
+    }
 
-.nav-links a:hover::after {
-  width: 100%;
-}
+    .nav-links a:hover::after {
+      width: 100%;
+    }
 
-/* Mobile nav toggle */
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-}
+    /* Mobile nav toggle */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
 
-.nav-toggle span {
-  display: block;
-  width: 22px;
-  height: 1.5px;
-  background: var(--text-primary);
-  margin: 5px 0;
-  transition: all 0.3s;
-}
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text-primary);
+      margin: 5px 0;
+      transition: all 0.3s;
+    }
 
-/* ══════════════════════════════════════
+    /* ══════════════════════════════════════
    Hero Section (Landing)
    ══════════════════════════════════════ */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
-}
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
 
-/* Subtle background texture */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 40%, var(--accent-glow), transparent),
-    radial-gradient(circle at 20% 80%, rgba(201, 169, 110, 0.03), transparent 50%);
-  pointer-events: none;
-}
+    /* Subtle background texture */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, var(--accent-glow), transparent),
+        radial-gradient(circle at 20% 80%, rgba(201, 169, 110, 0.03), transparent 50%);
+      pointer-events: none;
+    }
 
-/* Decorative line */
-.hero-line {
-  width: 1px;
-  height: 80px;
-  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
-  margin-bottom: 3rem;
-  animation: fadeSlideDown 1s var(--ease-out) 0.3s both;
-}
+    /* Decorative line */
+    .hero-line {
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+      margin-bottom: 3rem;
+      animation: fadeSlideDown 1s var(--ease-out) 0.3s both;
+    }
 
-.hero-greeting {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--accent);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-  animation: fadeSlideUp 0.8s var(--ease-out) 0.5s both;
-}
+    .hero-greeting {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fadeSlideUp 0.8s var(--ease-out) 0.5s both;
+    }
 
-.hero-name {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 700;
-  line-height: 1.15;
-  margin-bottom: 1.5rem;
-  animation: fadeSlideUp 0.8s var(--ease-out) 0.7s both;
-}
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      animation: fadeSlideUp 0.8s var(--ease-out) 0.7s both;
+    }
 
-.hero-name .accent {
-  color: var(--accent);
-}
+    .hero-name .accent {
+      color: var(--accent);
+    }
 
-.hero-tagline {
-  font-size: 1.15rem;
-  color: var(--text-secondary);
-  max-width: 520px;
-  line-height: 1.8;
-  margin-bottom: 3rem;
-  animation: fadeSlideUp 0.8s var(--ease-out) 0.9s both;
-}
+    .hero-tagline {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      animation: fadeSlideUp 0.8s var(--ease-out) 0.9s both;
+    }
 
-.hero-nav {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  animation: fadeSlideUp 0.8s var(--ease-out) 1.1s both;
-}
+    .hero-nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeSlideUp 0.8s var(--ease-out) 1.1s both;
+    }
 
-.hero-nav a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  transition: all 0.3s var(--ease-out);
-  background: transparent;
-}
+    .hero-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: all 0.3s var(--ease-out);
+      background: transparent;
+    }
 
-.hero-nav a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-dim);
-  opacity: 1;
-  transform: translateY(-2px);
-}
+    .hero-nav a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+      opacity: 1;
+      transform: translateY(-2px);
+    }
 
-.hero-nav a .arrow {
-  font-size: 0.75rem;
-  transition: transform 0.3s;
-}
+    .hero-nav a .arrow {
+      font-size: 0.75rem;
+      transition: transform 0.3s;
+    }
 
-.hero-nav a:hover .arrow {
-  transform: translateX(3px);
-}
+    .hero-nav a:hover .arrow {
+      transform: translateX(3px);
+    }
 
-/* Scroll indicator */
-.scroll-hint {
-  position: absolute;
-  bottom: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  animation: fadeSlideUp 0.8s var(--ease-out) 1.4s both;
-}
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: fadeSlideUp 0.8s var(--ease-out) 1.4s both;
+    }
 
-.scroll-hint span {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
+    .scroll-hint span {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
 
-.scroll-dot {
-  width: 1px;
-  height: 30px;
-  position: relative;
-  overflow: hidden;
-}
+    .scroll-dot {
+      width: 1px;
+      height: 30px;
+      position: relative;
+      overflow: hidden;
+    }
 
-.scroll-dot::after {
-  content: '';
-  position: absolute;
-  top: -100%;
-  width: 100%;
-  height: 100%;
-  background: var(--accent);
-  animation: scrollDot 2s ease-in-out infinite;
-}
+    .scroll-dot::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--accent);
+      animation: scrollDot 2s ease-in-out infinite;
+    }
 
-/* ══════════════════════════════════════
+    /* ══════════════════════════════════════
    Section Common Styles
    ══════════════════════════════════════ */
-.section {
-  padding: 6rem 2rem;
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
+    .section {
+      padding: 6rem 2rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
 
-.section-label {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--accent);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
 
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  line-height: 1.25;
-}
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      line-height: 1.25;
+    }
 
-.section-desc {
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin-bottom: 3rem;
-  font-size: 1.05rem;
-}
+    .section-desc {
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 3rem;
+      font-size: 1.05rem;
+    }
 
-.divider {
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 2rem;
-}
+    .divider {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
 
-.divider hr {
-  border: none;
-  height: 1px;
-  background: var(--border);
-}
+    .divider hr {
+      border: none;
+      height: 1px;
+      background: var(--border);
+    }
 
-/* ══════════════════════════════════════
+    /* ══════════════════════════════════════
    About Me Section
    ══════════════════════════════════════ */
-.about-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: start;
-}
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
 
-.about-text p {
-  color: var(--text-secondary);
-  margin-bottom: 1.2rem;
-  font-size: 1.02rem;
-}
+    .about-text p {
+      color: var(--text-secondary);
+      margin-bottom: 1.2rem;
+      font-size: 1.02rem;
+    }
 
-.about-text strong {
-  color: var(--text-primary);
-  font-weight: 500;
-}
+    .about-text strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
 
-.about-details {
-  display: grid;
-  gap: 1.5rem;
-}
+    .about-details {
+      display: grid;
+      gap: 1.5rem;
+    }
 
-.detail-card {
-  padding: 1.5rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  transition: all 0.3s var(--ease-out);
-}
+    .detail-card {
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.3s var(--ease-out);
+    }
 
-.detail-card:hover {
-  background: var(--bg-card-hover);
-  border-color: rgba(201, 169, 110, 0.25);
-  transform: translateY(-2px);
-}
+    .detail-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(201, 169, 110, 0.25);
+      transform: translateY(-2px);
+    }
 
-.detail-label {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--accent);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
+    .detail-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
 
-.detail-value {
-  font-size: 0.95rem;
-  color: var(--text-primary);
-  font-weight: 400;
-}
+    .detail-value {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      font-weight: 400;
+    }
 
-/* ══════════════════════════════════════
+    /* ══════════════════════════════════════
    ToneCheck Project Section
    ══════════════════════════════════════ */
-.tonecheck-showcase {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
-}
+    .tonecheck-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
 
-.tonecheck-visual {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2rem;
-  aspect-ratio: 4 / 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
+    .tonecheck-visual {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
 
-.tonecheck-visual::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 30% 40%, var(--accent-glow), transparent 70%);
-}
+    .tonecheck-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 40%, var(--accent-glow), transparent 70%);
+    }
 
-.tonecheck-placeholder {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  text-align: center;
-  z-index: 1;
-}
+    .tonecheck-placeholder {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+      z-index: 1;
+    }
 
-.tonecheck-info h3 {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
-}
+    .tonecheck-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
 
-.tonecheck-info p {
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
-}
+    .tonecheck-info p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
 
-.tonecheck-links {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
+    .tonecheck-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.4rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  transition: all 0.3s var(--ease-out);
-}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: all 0.3s var(--ease-out);
+    }
 
-.btn-primary {
-  background: var(--accent);
-  color: var(--bg-primary);
-}
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
 
-.btn-primary:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-}
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
 
-.btn-outline {
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-}
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
 
-.btn-outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  opacity: 1;
-}
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      opacity: 1;
+    }
 
-/* Feature tags */
-.feature-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-}
+    /* Feature tags */
+    .feature-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
 
-.tag {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  padding: 0.3rem 0.7rem;
-  background: var(--accent-dim);
-  color: var(--accent);
-  border-radius: 4px;
-  letter-spacing: 0.05em;
-}
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 0.3rem 0.7rem;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
 
-/* ══════════════════════════════════════
+    /* ══════════════════════════════════════
    Localization Gallery — Flip Cards
    ══════════════════════════════════════ */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.5rem;
-}
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
 
-/* Flip container */
-.flip-card {
-  perspective: 1000px;
-  height: 440px;
-  cursor: pointer;
-}
+    /* Flip container */
+    .flip-card {
+      perspective: 1000px;
+      height: 440px;
+      cursor: pointer;
+    }
 
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1);
-  transform-style: preserve-3d;
-}
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
 
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
 
-/* Shared face styles */
-.flip-front,
-.flip-back {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  overflow: hidden;
-}
+    /* Shared face styles */
+    .flip-front,
+    .flip-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
 
-/* ── Front face ── */
-.flip-front {
-  background: var(--bg-card);
-  display: flex;
-  flex-direction: column;
-}
+    /* ── Front face ── */
+    .flip-front {
+      background: var(--bg-card);
+      display: flex;
+      flex-direction: column;
+    }
 
-.flip-cover {
-  flex: 1;
-  background: var(--bg-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
+    .flip-cover {
+      flex: 1;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
 
-.flip-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease-out);
-}
+    .flip-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
+    }
 
-.flip-card:hover .flip-cover img {
-  transform: scale(1.05);
-}
+    .flip-card:hover .flip-cover img {
+      transform: scale(1.05);
+    }
 
-.flip-cover-placeholder {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
+    .flip-cover-placeholder {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
 
-.flip-front-info {
-  padding: 1.2rem 1.4rem;
-  background: var(--bg-card);
-  border-top: 1px solid var(--border);
-}
+    .flip-front-info {
+      padding: 1.2rem 1.4rem;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+    }
 
-.flip-front-title {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.3rem;
-}
+    .flip-front-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.3rem;
+    }
 
-.flip-front-hint {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
+    .flip-front-hint {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
 
-/* ── Back face ── */
-.flip-back {
-  background: var(--bg-card);
-  transform: rotateY(180deg);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 2rem;
-}
+    /* ── Back face ── */
+    .flip-back {
+      background: var(--bg-card);
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem;
+    }
 
-.flip-back-title {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.6rem;
-}
+    .flip-back-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.6rem;
+    }
 
-.flip-back-role {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--accent);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 1.2rem;
-  padding-bottom: 1.2rem;
-  border-bottom: 1px solid var(--border);
-}
+    .flip-back-role {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
 
-.flip-back-desc {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-}
+    .flip-back-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
 
-.flip-back-platform {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
-  margin-bottom: 1.5rem;
-}
+    .flip-back-platform {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+    }
 
-.flip-back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.3rem;
-  background: var(--accent);
-  color: var(--bg-primary);
-  border-radius: 6px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  transition: all 0.3s var(--ease-out);
-  align-self: flex-start;
-}
+    .flip-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.3rem;
+      background: var(--accent);
+      color: var(--bg-primary);
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: all 0.3s var(--ease-out);
+      align-self: flex-start;
+    }
 
-.flip-back-link:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-}
+    .flip-back-link:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
 
-.flip-back-link svg {
-  width: 14px;
-  height: 14px;
-}
+    .flip-back-link svg {
+      width: 14px;
+      height: 14px;
+    }
 
-/* Mobile: tap instead of hover */
-@media (hover: none) {
-  .flip-card.flipped .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-  .flip-card:hover .flip-card-inner {
-    transform: none;
-  }
-  .flip-card.flipped:hover .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-}
+    /* Mobile: tap instead of hover */
+    @media (hover: none) {
+      .flip-card.flipped .flip-card-inner {
+        transform: rotateY(180deg);
+      }
 
-/* ══════════════════════════════════════
+      .flip-card:hover .flip-card-inner {
+        transform: none;
+      }
+
+      .flip-card.flipped:hover .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+    }
+
+    /* ══════════════════════════════════════
    ComfyUI Section
    ══════════════════════════════════════ */
-.comfyui-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
+    .comfyui-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
 
-.comfyui-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-  transition: all 0.4s var(--ease-out);
-}
+    .comfyui-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.4s var(--ease-out);
+    }
 
-.comfyui-card:hover {
-  border-color: rgba(201, 169, 110, 0.3);
-  transform: translateY(-4px);
-}
+    .comfyui-card:hover {
+      border-color: rgba(201, 169, 110, 0.3);
+      transform: translateY(-4px);
+    }
 
-.comfyui-image {
-  aspect-ratio: 1;
-  background: var(--bg-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .comfyui-image {
+      aspect-ratio: 1;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.comfyui-image-placeholder {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
+    .comfyui-image-placeholder {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
 
-.comfyui-body {
-  padding: 1.2rem;
-}
+    .comfyui-body {
+      padding: 1.2rem;
+    }
 
-.comfyui-model {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--accent);
-  letter-spacing: 0.08em;
-  margin-bottom: 0.4rem;
-}
+    .comfyui-model {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
 
-.comfyui-caption {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-}
+    .comfyui-caption {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
 
-/* ══════════════════════════════════════
+    /* ══════════════════════════════════════
    Footer
    ══════════════════════════════════════ */
-.footer {
-  padding: 3rem 2rem;
-  text-align: center;
-  border-top: 1px solid var(--border);
-}
+    .footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
 
-.footer-content {
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
+    .footer-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
 
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-  list-style: none;
-}
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      list-style: none;
+    }
 
-.footer-links a {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  transition: color 0.3s;
-}
+    .footer-links a {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      transition: color 0.3s;
+    }
 
-.footer-links a:hover {
-  color: var(--accent);
-  opacity: 1;
-}
+    .footer-links a:hover {
+      color: var(--accent);
+      opacity: 1;
+    }
 
-.footer-copy {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
 
-/* ══════════════════════════════════════
+    /* ══════════════════════════════════════
    Animations
    ══════════════════════════════════════ */
-@keyframes fadeSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
 
-@keyframes fadeSlideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-@keyframes scrollDot {
-  0% { top: -100%; }
-  50% { top: 100%; }
-  100% { top: 100%; }
-}
+    @keyframes fadeSlideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-24px);
+      }
 
-/* Scroll reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
-}
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+    @keyframes scrollDot {
+      0% {
+        top: -100%;
+      }
 
-/* ══════════════════════════════════════
+      50% {
+        top: 100%;
+      }
+
+      100% {
+        top: 100%;
+      }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ══════════════════════════════════════
    Responsive
    ══════════════════════════════════════ */
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .nav-toggle { display: block; }
-  
-  .nav-links.open {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 64px;
-    left: 0;
-    right: 0;
-    background: rgba(15, 17, 23, 0.95);
-    backdrop-filter: blur(20px);
-    padding: 1.5rem 2rem;
-    gap: 1rem;
-    border-bottom: 1px solid var(--border);
-  }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
 
-  .about-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+      .nav-toggle {
+        display: block;
+      }
 
-  .tonecheck-showcase {
-    grid-template-columns: 1fr;
-  }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: rgba(15, 17, 23, 0.95);
+        backdrop-filter: blur(20px);
+        padding: 1.5rem 2rem;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
 
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
 
-  .hero-nav {
-    flex-direction: column;
-    align-items: center;
-  }
+      .tonecheck-showcase {
+        grid-template-columns: 1fr;
+      }
 
-  .hero-nav a {
-    width: 220px;
-    justify-content: center;
-  }
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
 
-  .section {
-    padding: 4rem 1.5rem;
-  }
-}
+      .hero-nav {
+        flex-direction: column;
+        align-items: center;
+      }
 
-@media (max-width: 480px) {
-  .hero-name {
-    font-size: 2rem;
-  }
-  
-  .comfyui-grid {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
+      .hero-nav a {
+        width: 220px;
+        justify-content: center;
+      }
+
+      .section {
+        padding: 4rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-name {
+        font-size: 2rem;
+      }
+
+      .comfyui-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- ═══════════════ Navigation ═══════════════ -->
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="nav-logo">[Your Name]</div>
-    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#tonecheck">ToneCheck</a></li>
-      <li><a href="#localization">Localization</a></li>
-      <li><a href="#comfyui">AI Art</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- ═══════════════ Hero ═══════════════ -->
-<section class="hero">
-  <div class="hero-line"></div>
-  <p class="hero-greeting">Welcome to my portfolio</p>
-  <h1 class="hero-name">
-    <span class="accent">彭佳琪</span>
-  </h1>
-  <p class="hero-tagline">
-    Game Localization · Overseas Marketing · AI-Enhanced Workflows<br>
-    语言为桥，连接游戏与世界。
-  </p>
-  <div class="hero-nav">
-    <a href="#tonecheck">ToneCheck 同调 <span class="arrow">→</span></a>
-    <a href="#localization">Localization Projects <span class="arrow">→</span></a>
-    <a href="#comfyui">AI Creative Works <span class="arrow">→</span></a>
-    <a href="#about">About Me <span class="arrow">→</span></a>
-  </div>
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-dot"></div>
-  </div>
-</section>
-
-<!-- ═══════════════ About Me ═══════════════ -->
-<div class="divider"><hr></div>
-<section class="section" id="about">
-  <div class="reveal">
-    <p class="section-label">01 — About</p>
-    <h2 class="section-title">关于我</h2>
-  </div>
-  <div class="about-content reveal">
-    <div class="about-text">
-      <p>
-        语言专业出身，长期做翻译和文本处理，对文字的准确性和语感有比较高的要求。工作风格偏实际，习惯拿可量化的交付结果说话。到目前为止独立参与或主导了 Half-Life 2 开发者注释、Disco Elysium、Lynked: Banner of the Spark 等十几款游戏的中文本地化，也因为在工作中反复碰到一致性检查的问题，自己做了一个叫 ToneCheck 的辅助工具。
-      </p>
-      <p>
-        对前沿技术保持关注，也有意识地把它们带进实际工作流——大语言模型、AI 辅助编程工具（Cursor）和 AI 图像生成工作流（ComfyUI）都在持续使用，不是停留在"了解"的层面。语言功底、游戏行业理解、技术工具意识，这三件事在我身上是一起长出来的，不是硬凑的组合。
-      </p>
+  <!-- ═══════════════ Navigation ═══════════════ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">[Your Name]</div>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"
+        aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#tonecheck">ToneCheck</a></li>
+        <li><a href="#localization">Localization</a></li>
+        <li><a href="#comfyui">AI Art</a></li>
+      </ul>
     </div>
-    <div class="about-details">
-      <div class="detail-card">
-        <div class="detail-label">Education</div>
-        <div class="detail-value">西安交通大学 · 翻译硕士（MTI）· 2026</div>
-      </div>
-      <div class="detail-card">
-        <div class="detail-label">Certifications</div>
-        <div class="detail-value">TEM-8（优秀）· CATTI 二级笔译 · CATTI 三级口译</div>
-      </div>
-      <div class="detail-card">
-        <div class="detail-label">Tools</div>
-        <div class="detail-value">memoQ · Crowdin · ComfyUI · Cursor</div>
-      </div>
-      <div class="detail-card">
-        <div class="detail-label">Contact</div>
-        <div class="detail-value"><a href="mailto:15536012188@163.com">15536012188@163.com</a></div>
-      </div>
-      <div class="detail-card" style="grid-column: 1 / -1;">
-        <div class="detail-label">Resume / 简历下载</div>
-        <div class="detail-value" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.3rem;">
-          <a href="resume/resume-game.pdf" target="_blank" class="btn btn-primary" style="font-size: 0.8rem; padding: 0.55rem 1.2rem;">游戏方向简历 ↓</a>
-          <a href="resume/resume-translation.pdf" target="_blank" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.55rem 1.2rem;">翻译方向简历 ↓</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  </nav>
 
-<!-- ═══════════════ ToneCheck ═══════════════ -->
-<div class="divider"><hr></div>
-<section class="section" id="tonecheck">
-  <div class="reveal">
-    <p class="section-label">02 — Featured Project</p>
-    <h2 class="section-title">ToneCheck 同调</h2>
-    <p class="section-desc">
-      一款独立设计的本地化质量辅助工具，帮助译者在本地化流程中快速检查译文的一致性与规范性。
+  <!-- ═══════════════ Hero ═══════════════ -->
+  <section class="hero">
+    <div class="hero-line"></div>
+    <p class="hero-greeting">Welcome to my portfolio</p>
+    <h1 class="hero-name">
+      <span class="accent">彭佳琪</span>
+    </h1>
+    <p class="hero-tagline">
+      Game Localization · Overseas Marketing · AI-Enhanced Workflows<br>
+      语言为桥，连接游戏与世界。
     </p>
+    <div class="hero-nav">
+      <a href="#tonecheck">ToneCheck 同调 <span class="arrow">→</span></a>
+      <a href="#localization">Localization Projects <span class="arrow">→</span></a>
+      <a href="#comfyui">AI Creative Works <span class="arrow">→</span></a>
+      <a href="#about">About Me <span class="arrow">→</span></a>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-dot"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ About Me ═══════════════ -->
+  <div class="divider">
+    <hr>
   </div>
-  <div class="tonecheck-showcase reveal">
-    <div class="tonecheck-visual">
-      <div class="tonecheck-placeholder">
-        [ 截图或演示 GIF 放在这里 ]<br>
-        建议尺寸：800 × 600
+  <section class="section" id="about">
+    <div class="reveal">
+      <p class="section-label">01 — About</p>
+      <h2 class="section-title">关于我</h2>
+    </div>
+    <div class="about-content reveal">
+      <div class="about-text">
+        <p>
+          语言专业出身，长期做翻译和文本处理，对文字的准确性和语感有比较高的要求。工作风格偏实际，习惯拿可量化的交付结果说话。到目前为止独立参与或主导了 Half-Life 2 开发者注释、Disco
+          Elysium、Lynked: Banner of the Spark 等十几款游戏的中文本地化，也因为在工作中反复碰到一致性检查的问题，自己做了一个叫 ToneCheck 的辅助工具。
+        </p>
+        <p>
+          对前沿技术保持关注，也有意识地把它们带进实际工作流——大语言模型、AI 辅助编程工具（Cursor）和 AI
+          图像生成工作流（ComfyUI）都在持续使用，不是停留在"了解"的层面。语言功底、游戏行业理解、技术工具意识，这三件事在我身上是一起长出来的，不是硬凑的组合。
+        </p>
+      </div>
+      <div class="about-details">
+        <div class="detail-card">
+          <div class="detail-label">Education</div>
+          <div class="detail-value">西安交通大学 · 翻译硕士（MTI）· 2026</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Certifications</div>
+          <div class="detail-value">TEM-8（优秀）· CATTI 二级笔译 · CATTI 三级口译</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Tools</div>
+          <div class="detail-value">memoQ · Crowdin · ComfyUI · Cursor</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Contact</div>
+          <div class="detail-value"><a href="mailto:15536012188@163.com">15536012188@163.com</a></div>
+        </div>
+        <div class="detail-card" style="grid-column: 1 / -1;">
+          <div class="detail-label">Resume / 简历下载</div>
+          <div class="detail-value" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.3rem;">
+            <a href="resume/resume-game.pdf" target="_blank" class="btn btn-primary"
+              style="font-size: 0.8rem; padding: 0.55rem 1.2rem;">游戏方向简历 ↓</a>
+            <a href="resume/resume-translation.pdf" target="_blank" class="btn btn-outline"
+              style="font-size: 0.8rem; padding: 0.55rem 1.2rem;">翻译方向简历 ↓</a>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="tonecheck-info">
-      <div class="feature-tags">
-        <span class="tag">Python</span>
-        <span class="tag">Localization QA</span>
-        <span class="tag">独立开发</span>
-      </div>
-      <h3>核心功能</h3>
-      <p>
-        <!-- TODO: 补充ToneCheck的具体功能描述 -->
-        [在这里描述ToneCheck的核心功能和使用场景。
-        重点说明它解决了本地化流程中的什么问题，
-        以及为什么你会想要做这样一个工具。]
+  </section>
+
+  <!-- ═══════════════ ToneCheck ═══════════════ -->
+  <div class="divider">
+    <hr>
+  </div>
+  <section class="section" id="tonecheck">
+    <div class="reveal">
+      <p class="section-label">02 — Featured Project</p>
+      <h2 class="section-title">ToneCheck 同调</h2>
+      <p class="section-desc">
+        一款独立设计的本地化质量辅助工具，帮助译者在本地化流程中快速检查译文的一致性与规范性。
       </p>
-      <div class="tonecheck-links">
-        <a href="https://tonecheck.cn" target="_blank" class="btn btn-primary">
-          访问 tonecheck.cn
-        </a>
-        <a href="#" target="_blank" class="btn btn-outline">
-          GitHub 源码
-        </a>
+    </div>
+    <div class="tonecheck-showcase reveal">
+      <div class="tonecheck-visual">
+        <div class="tonecheck-placeholder">
+          [ 截图或演示 GIF 放在这里 ]<br>
+          建议尺寸：800 × 600
+        </div>
+      </div>
+      <div class="tonecheck-info">
+        <div class="feature-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Localization QA</span>
+          <span class="tag">独立开发</span>
+        </div>
+        <h3>核心功能</h3>
+        <p>
+          <!-- TODO: 补充ToneCheck的具体功能描述 -->
+          [在这里描述ToneCheck的核心功能和使用场景。
+          重点说明它解决了本地化流程中的什么问题，
+          以及为什么你会想要做这样一个工具。]
+        </p>
+        <div class="tonecheck-links">
+          <a href="https://tonecheck.cn" target="_blank" class="btn btn-primary">
+            访问 tonecheck.cn
+          </a>
+          <a href="#" target="_blank" class="btn btn-outline">
+            GitHub 源码
+          </a>
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- ═══════════════ Localization Gallery ═══════════════ -->
+  <div class="divider">
+    <hr>
   </div>
-</section>
+  <section class="section" id="localization">
+    <div class="reveal">
+      <p class="section-label">03 — Localization</p>
+      <h2 class="section-title">本地化项目</h2>
+      <p class="section-desc">
+        参与多款游戏的中文本地化工作，涵盖多种类型、独立游戏及EA项目。
+      </p>
+    </div>
+    <div class="gallery-grid reveal">
 
-<!-- ═══════════════ Localization Gallery ═══════════════ -->
-<div class="divider"><hr></div>
-<section class="section" id="localization">
-  <div class="reveal">
-    <p class="section-label">03 — Localization</p>
-    <h2 class="section-title">本地化项目</h2>
-    <p class="section-desc">
-      参与多款游戏的中文本地化工作，涵盖多种类型、独立游戏及EA项目。
-    </p>
+      <!-- ══ Tier 1: Flagship Projects ══ -->
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/HL2.jpg" alt="Half-Life 2"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">Half-Life 2</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">Half-Life 2</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">20周年纪念版开发者注释（Developer Commentary）中文本地化。通过 Crowdin 平台与 Valve 协作完成。</p>
+            <p class="flip-back-platform">Platform: Steam</p>
+            <a href="https://store.steampowered.com/app/220/HalfLife_2/" target="_blank" class="flip-back-link"
+              onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/MerMa.jpg" alt="The Mermaid Mask"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">The Mermaid Mask</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">The Mermaid Mask</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">Detective Grimoire 系列最新作，点击式推理冒险游戏。SFB Games 开发，全文本中文本地化。</p>
+            <p class="flip-back-platform">Platform: Steam · Upcoming 2026</p>
+            <a href="https://store.steampowered.com/app/1696770/The_Mermaid_Mask/" target="_blank"
+              class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/Lynked.jpg" alt="联结：星火之盟"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">Lynked: Banner of the Spark</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">联结：星火之盟</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">合作动作 RPG，FuzzyBot 开发。全文本中文本地化，项目字数量大。</p>
+            <p class="flip-back-platform">Platform: Steam / Nintendo Switch</p>
+            <a href="https://store.steampowered.com/app/3159570/Lynked_Banner_of_the_Spark/" target="_blank"
+              class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/Disco.jpg" alt="Disco Elysium"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">Disco Elysium — The Final Cut</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">Disco Elysium</h3>
+            <p class="flip-back-role">Chinese Localization · Content Policy</p>
+            <p class="flip-back-desc">极乐迪斯科 Content Policy（内容政策）部分中文本地化。ZA/UM 开发。</p>
+            <p class="flip-back-platform">Platform: Steam / Multi</p>
+            <a href="https://store.steampowered.com/app/632470/Disco_Elysium__The_Final_Cut/" target="_blank"
+              class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ Tier 2: Released Titles ══ -->
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/Planet.jpg" alt="The Planet Crafter"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">The Planet Crafter</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">The Planet Crafter</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">开放世界生存建造游戏，星球改造题材。Miju Games 开发。</p>
+            <p class="flip-back-platform">Platform: Steam</p>
+            <a href="https://store.steampowered.com/app/1284190/The_Planet_Crafter/" target="_blank"
+              class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/HLB.jpg" alt="Hyper Light Breaker"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">Hyper Light Breaker</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">Hyper Light Breaker</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">Hyper Light 系列 3D 开放世界 Roguelite，Heart Machine 开发。</p>
+            <p class="flip-back-platform">Platform: Steam (Early Access)</p>
+            <a href="https://store.steampowered.com/app/1534840/" target="_blank" class="flip-back-link"
+              onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/Deck.jpg" alt="Deck of Haunts"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">Deck of Haunts</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">Deck of Haunts</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">卡牌构筑 Roguelite，扮演鬼屋吓退入侵者。Mantis Games 开发，DANGEN 发行。</p>
+            <p class="flip-back-platform">Platform: Steam</p>
+            <a href="https://store.steampowered.com/app/3179730/Deck_of_Haunts/" target="_blank" class="flip-back-link"
+              onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/Umami.jpg" alt="Umami Grove"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">Umami Grove</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">Umami Grove</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">物理交互 VR 烹饪冒险游戏。Pomshine Games 开发，DANGEN 发行。</p>
+            <p class="flip-back-platform">Platform: Steam / PSVR2</p>
+            <a href="https://store.steampowered.com/app/1394470/Umami_Grove/" target="_blank" class="flip-back-link"
+              onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/Rfit.jpg" alt="Rift Riff"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">Rift Riff</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">Rift Riff</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">策略塔防游戏，Hidden Folks 开发者新作。Adriaan de Jongh 开发。</p>
+            <p class="flip-back-platform">Platform: Steam</p>
+            <a href="https://store.steampowered.com/app/2800900/Rift_Riff/" target="_blank" class="flip-back-link"
+              onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/Webbing.jpg" alt="A Webbing Journey"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">A Webbing Journey</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">A Webbing Journey</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">物理沙盒蜘蛛冒险游戏。Fire Totem Games 开发，Future Friends Games 发行。</p>
+            <p class="flip-back-platform">Platform: Steam (Early Access)</p>
+            <a href="https://store.steampowered.com/app/2073910/A_Webbing_Journey/" target="_blank"
+              class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/Bloodline.jpg" alt="The Bloodline"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">The Bloodline</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">The Bloodline</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">开放世界奇幻动作 RPG，骑砍风格。Shieldbearer Studios 开发。</p>
+            <p class="flip-back-platform">Platform: Steam (Early Access)</p>
+            <a href="https://store.steampowered.com/app/1159290/The_Bloodline/" target="_blank" class="flip-back-link"
+              onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/Nubs.jpg" alt="Nubs! Arena"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">Nubs! Arena</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">Nubs! Arena</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">快节奏俯视角多人竞技乱斗。Glowfish Interactive / Rangatang 开发。</p>
+            <p class="flip-back-platform">Platform: Steam</p>
+            <a href="https://store.steampowered.com/app/2337860/Nubs_Arena/" target="_blank" class="flip-back-link"
+              onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/Hellbound.jpg" alt="Hellbound"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">Hellbound</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">Hellbound</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">复古 90 年代风格 FPS。Saibot Studios 开发。</p>
+            <p class="flip-back-platform">Platform: Steam</p>
+            <a href="https://store.steampowered.com/app/753590/Hellbound/" target="_blank" class="flip-back-link"
+              onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ Tier 3: Upcoming / Unreleased ══ -->
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/WHT.jpg" alt="We Were Here Tomorrow"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">We Were Here Tomorrow</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">We Were Here Tomorrow</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">We Were Here 系列第五作，双人合作解谜冒险。Total Mayhem Games 开发。</p>
+            <p class="flip-back-platform">Platform: Steam · Upcoming 2026</p>
+            <a href="https://store.steampowered.com/app/2315050/We_Were_Here_Tomorrow/" target="_blank"
+              class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/BW.jpg" alt="Big Walk"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">Big Walk</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">Big Walk</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">Untitled Goose Game 开发商 House House 新作，合作探索冒险。Panic 发行。</p>
+            <p class="flip-back-platform">Platform: Steam · Upcoming 2026</p>
+            <a href="https://store.steampowered.com/app/1478500/Big_Walk/" target="_blank" class="flip-back-link"
+              onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-cover"><img src="images/Railborn.jpg" alt="Railborn"></div>
+            <div class="flip-front-info">
+              <h3 class="flip-front-title">Railborn</h3>
+              <p class="flip-front-hint">Hover to see details</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="flip-back-title">Railborn</h3>
+            <p class="flip-back-role">Chinese Localization · Core Translator</p>
+            <p class="flip-back-desc">火车建造生存游戏，支持 1-4 人合作。Washbear Studio 开发。</p>
+            <p class="flip-back-platform">Platform: Steam · Upcoming</p>
+            <a href="https://store.steampowered.com/app/2340970/Railborn/" target="_blank" class="flip-back-link"
+              onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>Steam 商店页面</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════ ComfyUI Works ═══════════════ -->
+  <div class="divider">
+    <hr>
   </div>
-  <div class="gallery-grid reveal">
-
-    <!-- ══ Tier 1: Flagship Projects ══ -->
-
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/HL2.jpg" alt="Half-Life 2"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">Half-Life 2</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">Half-Life 2</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">20周年纪念版开发者注释（Developer Commentary）中文本地化。通过 Crowdin 平台与 Valve 协作完成。</p>
-          <p class="flip-back-platform">Platform: Steam</p>
-          <a href="https://store.steampowered.com/app/220/HalfLife_2/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
+  <section class="section" id="comfyui">
+    <div class="reveal">
+      <p class="section-label">04 — AI Creative</p>
+      <h2 class="section-title">AI 生成作品</h2>
+      <p class="section-desc">
+        基于 ComfyUI 的游戏题材 AI 图像创作，使用 Flux Klein 与 Z-Image 模型，
+        展示对 AI 工作流的深度理解与实际操作能力。
+      </p>
     </div>
+    <div class="comfyui-grid reveal">
 
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/MerMa.jpg" alt="The Mermaid Mask"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">The Mermaid Mask</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
+      <div class="comfyui-card">
+        <div class="comfyui-image">
+          <span class="comfyui-image-placeholder">[ 作品 1 ]</span>
         </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">The Mermaid Mask</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">Detective Grimoire 系列最新作，点击式推理冒险游戏。SFB Games 开发，全文本中文本地化。</p>
-          <p class="flip-back-platform">Platform: Steam · Upcoming 2026</p>
-          <a href="https://store.steampowered.com/app/1696770/The_Mermaid_Mask/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
+        <div class="comfyui-body">
+          <p class="comfyui-model">Flux Klein · [工作流名称]</p>
+          <p class="comfyui-caption">[简要描述：题材、提示词策略、后处理手段]</p>
         </div>
       </div>
+
+      <div class="comfyui-card">
+        <div class="comfyui-image">
+          <span class="comfyui-image-placeholder">[ 作品 2 ]</span>
+        </div>
+        <div class="comfyui-body">
+          <p class="comfyui-model">Z-Image · [工作流名称]</p>
+          <p class="comfyui-caption">[简要描述]</p>
+        </div>
+      </div>
+
+      <div class="comfyui-card">
+        <div class="comfyui-image">
+          <span class="comfyui-image-placeholder">[ 作品 3 ]</span>
+        </div>
+        <div class="comfyui-body">
+          <p class="comfyui-model">[模型] · [工作流名称]</p>
+          <p class="comfyui-caption">[简要描述]</p>
+        </div>
+      </div>
+
     </div>
+  </section>
 
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/Lynked.jpg" alt="联结：星火之盟"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">Lynked: Banner of the Spark</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">联结：星火之盟</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">合作动作 RPG，FuzzyBot 开发。全文本中文本地化，项目字数量大。</p>
-          <p class="flip-back-platform">Platform: Steam / Nintendo Switch</p>
-          <a href="https://store.steampowered.com/app/3159570/Lynked_Banner_of_the_Spark/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
+  <!-- ═══════════════ Footer ═══════════════ -->
+  <footer class="footer">
+    <div class="footer-content">
+      <ul class="footer-links">
+        <li><a href="https://tonecheck.cn" target="_blank">ToneCheck</a></li>
+        <li><a href="#" target="_blank">GitHub</a></li>
+        <li><a href="mailto:15536012188@163.com">Email</a></li>
+      </ul>
+      <p class="footer-copy">© 2025 [Your Name]. Built with purpose.</p>
     </div>
+  </footer>
 
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/Disco.jpg" alt="Disco Elysium"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">Disco Elysium — The Final Cut</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">Disco Elysium</h3>
-          <p class="flip-back-role">Chinese Localization · Content Policy</p>
-          <p class="flip-back-desc">极乐迪斯科 Content Policy（内容政策）部分中文本地化。ZA/UM 开发。</p>
-          <p class="flip-back-platform">Platform: Steam / Multi</p>
-          <a href="https://store.steampowered.com/app/632470/Disco_Elysium__The_Final_Cut/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
-    </div>
+  <!-- ═══════════════ Scripts ═══════════════ -->
+  <script>
+    // Scroll reveal animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    <!-- ══ Tier 2: Released Titles ══ -->
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/Planet.jpg" alt="The Planet Crafter"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">The Planet Crafter</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">The Planet Crafter</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">开放世界生存建造游戏，星球改造题材。Miju Games 开发。</p>
-          <p class="flip-back-platform">Platform: Steam</p>
-          <a href="https://store.steampowered.com/app/1284190/The_Planet_Crafter/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/HLB.jpg" alt="Hyper Light Breaker"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">Hyper Light Breaker</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">Hyper Light Breaker</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">Hyper Light 系列 3D 开放世界 Roguelite，Heart Machine 开发。</p>
-          <p class="flip-back-platform">Platform: Steam (Early Access)</p>
-          <a href="https://store.steampowered.com/app/1534840/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/Deck.jpg" alt="Deck of Haunts"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">Deck of Haunts</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">Deck of Haunts</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">卡牌构筑 Roguelite，扮演鬼屋吓退入侵者。Mantis Games 开发，DANGEN 发行。</p>
-          <p class="flip-back-platform">Platform: Steam</p>
-          <a href="https://store.steampowered.com/app/3179730/Deck_of_Haunts/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/Umami.jpg" alt="Umami Grove"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">Umami Grove</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">Umami Grove</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">物理交互 VR 烹饪冒险游戏。Pomshine Games 开发，DANGEN 发行。</p>
-          <p class="flip-back-platform">Platform: Steam / PSVR2</p>
-          <a href="https://store.steampowered.com/app/1394470/Umami_Grove/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/Rift.jpg" alt="Rift Riff"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">Rift Riff</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">Rift Riff</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">策略塔防游戏，Hidden Folks 开发者新作。Adriaan de Jongh 开发。</p>
-          <p class="flip-back-platform">Platform: Steam</p>
-          <a href="https://store.steampowered.com/app/2800900/Rift_Riff/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/Webbing.jpg" alt="A Webbing Journey"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">A Webbing Journey</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">A Webbing Journey</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">物理沙盒蜘蛛冒险游戏。Fire Totem Games 开发，Future Friends Games 发行。</p>
-          <p class="flip-back-platform">Platform: Steam (Early Access)</p>
-          <a href="https://store.steampowered.com/app/2073910/A_Webbing_Journey/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/Bloodline.jpg" alt="The Bloodline"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">The Bloodline</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">The Bloodline</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">开放世界奇幻动作 RPG，骑砍风格。Shieldbearer Studios 开发。</p>
-          <p class="flip-back-platform">Platform: Steam (Early Access)</p>
-          <a href="https://store.steampowered.com/app/1159290/The_Bloodline/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/Nubs.jpg" alt="Nubs! Arena"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">Nubs! Arena</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">Nubs! Arena</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">快节奏俯视角多人竞技乱斗。Glowfish Interactive / Rangatang 开发。</p>
-          <p class="flip-back-platform">Platform: Steam</p>
-          <a href="https://store.steampowered.com/app/2337860/Nubs_Arena/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/Hellbound.jpg" alt="Hellbound"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">Hellbound</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">Hellbound</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">复古 90 年代风格 FPS。Saibot Studios 开发。</p>
-          <p class="flip-back-platform">Platform: Steam</p>
-          <a href="https://store.steampowered.com/app/753590/Hellbound/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ Tier 3: Upcoming / Unreleased ══ -->
-
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/WHT.jpg" alt="We Were Here Tomorrow"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">We Were Here Tomorrow</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">We Were Here Tomorrow</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">We Were Here 系列第五作，双人合作解谜冒险。Total Mayhem Games 开发。</p>
-          <p class="flip-back-platform">Platform: Steam · Upcoming 2026</p>
-          <a href="https://store.steampowered.com/app/2315050/We_Were_Here_Tomorrow/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/BW.jpg" alt="Big Walk"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">Big Walk</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">Big Walk</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">Untitled Goose Game 开发商 House House 新作，合作探索冒险。Panic 发行。</p>
-          <p class="flip-back-platform">Platform: Steam · Upcoming 2026</p>
-          <a href="https://store.steampowered.com/app/1478500/Big_Walk/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="flip-card" onclick="this.classList.toggle('flipped')">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="flip-cover"><img src="images/Railborn.jpg" alt="Railborn"></div>
-          <div class="flip-front-info">
-            <h3 class="flip-front-title">Railborn</h3>
-            <p class="flip-front-hint">Hover to see details</p>
-          </div>
-        </div>
-        <div class="flip-back">
-          <h3 class="flip-back-title">Railborn</h3>
-          <p class="flip-back-role">Chinese Localization · Core Translator</p>
-          <p class="flip-back-desc">火车建造生存游戏，支持 1-4 人合作。Washbear Studio 开发。</p>
-          <p class="flip-back-platform">Platform: Steam · Upcoming</p>
-          <a href="https://store.steampowered.com/app/2340970/Railborn/" target="_blank" class="flip-back-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Steam 商店页面</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══════════════ ComfyUI Works ═══════════════ -->
-<div class="divider"><hr></div>
-<section class="section" id="comfyui">
-  <div class="reveal">
-    <p class="section-label">04 — AI Creative</p>
-    <h2 class="section-title">AI 生成作品</h2>
-    <p class="section-desc">
-      基于 ComfyUI 的游戏题材 AI 图像创作，使用 Flux Klein 与 Z-Image 模型，
-      展示对 AI 工作流的深度理解与实际操作能力。
-    </p>
-  </div>
-  <div class="comfyui-grid reveal">
-
-    <div class="comfyui-card">
-      <div class="comfyui-image">
-        <span class="comfyui-image-placeholder">[ 作品 1 ]</span>
-      </div>
-      <div class="comfyui-body">
-        <p class="comfyui-model">Flux Klein · [工作流名称]</p>
-        <p class="comfyui-caption">[简要描述：题材、提示词策略、后处理手段]</p>
-      </div>
-    </div>
-
-    <div class="comfyui-card">
-      <div class="comfyui-image">
-        <span class="comfyui-image-placeholder">[ 作品 2 ]</span>
-      </div>
-      <div class="comfyui-body">
-        <p class="comfyui-model">Z-Image · [工作流名称]</p>
-        <p class="comfyui-caption">[简要描述]</p>
-      </div>
-    </div>
-
-    <div class="comfyui-card">
-      <div class="comfyui-image">
-        <span class="comfyui-image-placeholder">[ 作品 3 ]</span>
-      </div>
-      <div class="comfyui-body">
-        <p class="comfyui-model">[模型] · [工作流名称]</p>
-        <p class="comfyui-caption">[简要描述]</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══════════════ Footer ═══════════════ -->
-<footer class="footer">
-  <div class="footer-content">
-    <ul class="footer-links">
-      <li><a href="https://tonecheck.cn" target="_blank">ToneCheck</a></li>
-      <li><a href="#" target="_blank">GitHub</a></li>
-      <li><a href="mailto:15536012188@163.com">Email</a></li>
-    </ul>
-    <p class="footer-copy">© 2025 [Your Name]. Built with purpose.</p>
-  </div>
-</footer>
-
-<!-- ═══════════════ Scripts ═══════════════ -->
-<script>
-// Scroll reveal animation
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Close mobile nav on link click
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    document.querySelector('.nav-links').classList.remove('open');
-  });
-});
-</script>
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('open');
+      });
+    });
+  </script>
 
 </body>
+
 </html>
