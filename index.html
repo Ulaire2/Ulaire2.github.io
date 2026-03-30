@@ -410,15 +410,14 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
-      align-items: center;
+      align-items: start;
     }
 
     .tonecheck-visual {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 2rem;
-      aspect-ratio: 4 / 3;
+      padding: 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -426,11 +425,19 @@
       overflow: hidden;
     }
 
+    .tonecheck-visual img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+    }
+
     .tonecheck-visual::before {
       content: '';
       position: absolute;
       inset: 0;
       background: radial-gradient(circle at 30% 40%, var(--accent-glow), transparent 70%);
+      pointer-events: none;
     }
 
     .tonecheck-placeholder {
@@ -978,7 +985,7 @@
         </div>
         <div class="detail-card">
           <div class="detail-label">Contact</div>
-          <div class="detail-value"><a href="mailto:15536012188@163.com">15536012188@163.com</a></div>
+          <div class="detail-value"><a href="/cdn-cgi/l/email-protection#ac9d99999f9a9c9d9e9d9494ec9d9a9f82cfc3c1"><span class="__cf_email__" data-cfemail="85b4b0b0b6b3b5b4b7b4bdbdc5b4b3b6abe6eae8">[email&#160;protected]</span></a></div>
         </div>
         <div class="detail-card" style="grid-column: 1 / -1;">
           <div class="detail-label">Resume / 简历下载</div>
@@ -1002,32 +1009,30 @@
       <p class="section-label">02 — Featured Project</p>
       <h2 class="section-title">ToneCheck 同调</h2>
       <p class="section-desc">
-        一款独立设计的本地化质量辅助工具，帮助译者在本地化流程中快速检查译文语气的一致性。
+        面向游戏本地化的 AI 语言质量检查工具，独立设计开发，持续迭代中。
       </p>
     </div>
     <div class="tonecheck-showcase reveal">
       <div class="tonecheck-visual">
-        <img src="images/ToneCheck.png" alt="ToneCheck 同调"
-          style="width: 100%; height: 100%; object-fit: cover; border-radius: 11px;">
+        <img src="images/ToneCheck.png" alt="ToneCheck 同调">
       </div>
-    </div>
-    <div class="tonecheck-info">
-      <div class="feature-tags">
-        <span class="tag">AI Coding</span>
-        <span class="tag">Localization QA</span>
-        <span class="tag">独立项目</span>
+      <div class="tonecheck-info">
+        <div class="feature-tags">
+          <span class="tag">AI Coding</span>
+          <span class="tag">Localization QA</span>
+          <span class="tag">独立项目</span>
+        </div>
+        <h3>核心功能</h3>
+        <p>
+          在游戏本地化流程中，译文的语气一致性和术语规范性很难靠人工逐条排查。ToneCheck 的出发点就是用 AI
+          辅助解决这个问题——对译文进行语气层面的质量检查（LQA），标记风格不一致、语气偏差。目前仍在持续迭代中。
+        </p>
+        <div class="tonecheck-links">
+          <a href="https://tonecheck.cn" target="_blank" class="btn btn-primary">
+            访问 tonecheck.cn
+          </a>
+        </div>
       </div>
-      <h3>核心功能</h3>
-      <p>
-        在游戏本地化流程中，译文的语气一致性和术语规范性很难靠人工逐条排查。ToneCheck 的出发点就是用 AI
-        辅助解决这个问题，即对译文进行语气层面的质量检查（LQA），标记风格不一致、语气偏差。目前仍在持续迭代中。
-      </p>
-      <div class="tonecheck-links">
-        <a href="https://tonecheck.cn" target="_blank" class="btn btn-primary">
-          访问 tonecheck.cn
-        </a>
-      </div>
-    </div>
     </div>
   </section>
 
@@ -1508,14 +1513,14 @@
       <ul class="footer-links">
         <li><a href="https://tonecheck.cn" target="_blank">ToneCheck</a></li>
         <li><a href="#" target="_blank">GitHub</a></li>
-        <li><a href="mailto:15536012188@163.com">Email</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#4a7b7f7f797c7a7b787b72720a7b7c7964292527">Email</a></li>
       </ul>
       <p class="footer-copy">© 2025 [Your Name]. Built with purpose.</p>
     </div>
   </footer>
 
   <!-- ═══════════════ Scripts ═══════════════ -->
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Scroll reveal animation
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1525,16 +1530,4 @@
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Close mobile nav on link click
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.querySelector('.nav-links').classList.remove('open');
-      });
-    });
-  </script>
-
-</body>
-
-</html>
+    document.querySelectorAll('.reveal').forEach(el => obse
