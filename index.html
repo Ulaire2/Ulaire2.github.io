@@ -503,14 +503,14 @@ a:hover { opacity: 0.8; }
    ══════════════════════════════════════ */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.8rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
 }
 
 /* Flip container */
 .flip-card {
   perspective: 1000px;
-  height: 380px;
+  height: 440px;
   cursor: pointer;
 }
 
@@ -841,9 +841,8 @@ a:hover { opacity: 0.8; }
   }
 
   .gallery-grid {
-    grid-template-columns: 1fr;
-    max-width: 400px;
-    margin: 0 auto;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 
   .hero-nav {
@@ -923,31 +922,35 @@ a:hover { opacity: 0.8; }
   <div class="about-content reveal">
     <div class="about-text">
       <p>
-        <!-- TODO: 替换为你的个人介绍 -->
-        [在这里写你的个人简介。建议200字左右，涵盖教育背景、核心技能、职业方向。
-        语气可以比简历更个人化一些，让读者感受到你是一个真实的、有想法的人。]
+        语言专业出身，长期做翻译和文本处理，对文字的准确性和语感有比较高的要求。工作风格偏实际，习惯拿可量化的交付结果说话。到目前为止独立参与或主导了 Half-Life 2 开发者注释、Disco Elysium、Lynked: Banner of the Spark 等十几款游戏的中文本地化，也因为在工作中反复碰到一致性检查的问题，自己做了一个叫 ToneCheck 的辅助工具。
       </p>
       <p>
-        [第二段可以补充你的差异化优势——比如语言功底 × 游戏行业理解 × AI工具实操能力
-        这个三角组合，以及你对这个领域的热情。]
+        对前沿技术保持关注，也有意识地把它们带进实际工作流——大语言模型、AI 辅助编程工具（Cursor）和 AI 图像生成工作流（ComfyUI）都在持续使用，不是停留在"了解"的层面。语言功底、游戏行业理解、技术工具意识，这三件事在我身上是一起长出来的，不是硬凑的组合。
       </p>
     </div>
     <div class="about-details">
       <div class="detail-card">
         <div class="detail-label">Education</div>
-        <div class="detail-value">[学校] · 英语翻译与口译硕士 · 2025</div>
+        <div class="detail-value">西安交通大学 · 翻译硕士（MTI）· 2026</div>
       </div>
       <div class="detail-card">
         <div class="detail-label">Certifications</div>
-        <div class="detail-value">TEM-8（优秀）· CATTI 二级笔译</div>
+        <div class="detail-value">TEM-8（优秀）· CATTI 二级笔译 · CATTI 三级口译</div>
       </div>
       <div class="detail-card">
-        <div class="detail-label">Experience</div>
-        <div class="detail-value">[公司名] · 海外市场营销实习</div>
+        <div class="detail-label">Tools</div>
+        <div class="detail-value">memoQ · Crowdin · ComfyUI · Cursor</div>
       </div>
       <div class="detail-card">
         <div class="detail-label">Contact</div>
-        <div class="detail-value">[email@example.com]</div>
+        <div class="detail-value"><a href="mailto:15536012188@163.com">15536012188@163.com</a></div>
+      </div>
+      <div class="detail-card" style="grid-column: 1 / -1;">
+        <div class="detail-label">Resume / 简历下载</div>
+        <div class="detail-value" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.3rem;">
+          <a href="resume/resume-game.pdf" target="_blank" class="btn btn-primary" style="font-size: 0.8rem; padding: 0.55rem 1.2rem;">游戏方向简历 ↓</a>
+          <a href="resume/resume-translation.pdf" target="_blank" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.55rem 1.2rem;">翻译方向简历 ↓</a>
+        </div>
       </div>
     </div>
   </div>
@@ -1012,7 +1015,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/HL2.jpg" alt="Half-Life 2"></span></div>
+          <div class="flip-cover"><img src="images/HL2.jpg" alt="Half-Life 2"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">Half-Life 2</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1031,7 +1034,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/MerMa.jpg" alt="The Mermaid Mask"></span></div>
+          <div class="flip-cover"><img src="images/MerMa.jpg" alt="The Mermaid Mask"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">The Mermaid Mask</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1050,7 +1053,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/Lynked.jpg" alt="联结：星火之盟"></span></div>
+          <div class="flip-cover"><img src="images/Lynked.jpg" alt="联结：星火之盟"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">Lynked: Banner of the Spark</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1069,7 +1072,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/Disco.jpg" alt="Disco Elysium"></span></div>
+          <div class="flip-cover"><img src="images/Disco.jpg" alt="Disco Elysium"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">Disco Elysium — The Final Cut</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1090,7 +1093,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/Planet.jpg" alt="The Planet Crafter"></span></div>
+          <div class="flip-cover"><img src="images/Planet.jpg" alt="The Planet Crafter"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">The Planet Crafter</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1109,7 +1112,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/HLB.jpg" alt="Hyper Light Breaker"></span></div>
+          <div class="flip-cover"><img src="images/HLB.jpg" alt="Hyper Light Breaker"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">Hyper Light Breaker</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1128,7 +1131,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/Deck.jpg" alt="Deck of Haunts"></span></div>
+          <div class="flip-cover"><img src="images/Deck.jpg" alt="Deck of Haunts"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">Deck of Haunts</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1147,7 +1150,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/Umami.jpg" alt="Umami Grove"></span></div>
+          <div class="flip-cover"><img src="images/Umami.jpg" alt="Umami Grove"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">Umami Grove</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1166,7 +1169,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/Rift.jpg" alt="Rift Riff"></span></div>
+          <div class="flip-cover"><img src="images/Rift.jpg" alt="Rift Riff"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">Rift Riff</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1185,7 +1188,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/Webbing.jpg" alt="A Webbing Journey"></span></div>
+          <div class="flip-cover"><img src="images/Webbing.jpg" alt="A Webbing Journey"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">A Webbing Journey</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1204,7 +1207,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/Bloodline.jpg" alt="The Bloodline"></span></div>
+          <div class="flip-cover"><img src="images/Bloodline.jpg" alt="The Bloodline"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">The Bloodline</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1223,7 +1226,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/Nubs.jpg" alt="Nubs! Arena"></span></div>
+          <div class="flip-cover"><img src="images/Nubs.jpg" alt="Nubs! Arena"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">Nubs! Arena</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1242,7 +1245,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/Hellbound.jpg" alt="Hellbound"></span></div>
+          <div class="flip-cover"><img src="images/Hellbound.jpg" alt="Hellbound"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">Hellbound</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1263,7 +1266,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/WHT.jpg" alt="We Were Here Tomorrow"></span></div>
+          <div class="flip-cover"><img src="images/WHT.jpg" alt="We Were Here Tomorrow"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">We Were Here Tomorrow</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1282,7 +1285,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/BW.jpg" alt="Big Walk"></span></div>
+          <div class="flip-cover"><img src="images/BW.jpg" alt="Big Walk"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">Big Walk</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1301,7 +1304,7 @@ a:hover { opacity: 0.8; }
     <div class="flip-card" onclick="this.classList.toggle('flipped')">
       <div class="flip-card-inner">
         <div class="flip-front">
-          <div class="flip-cover"><img src="images/Railborn.jpg" alt="Railborn"></span></div>
+          <div class="flip-cover"><img src="images/Railborn.jpg" alt="Railborn"></div>
           <div class="flip-front-info">
             <h3 class="flip-front-title">Railborn</h3>
             <p class="flip-front-hint">Hover to see details</p>
@@ -1372,14 +1375,14 @@ a:hover { opacity: 0.8; }
     <ul class="footer-links">
       <li><a href="https://tonecheck.cn" target="_blank">ToneCheck</a></li>
       <li><a href="#" target="_blank">GitHub</a></li>
-      <li><a href="mailto:email@example.com">Email</a></li>
+      <li><a href="/cdn-cgi/l/email-protection#593c34383035193c21383429353c773a3634">Email</a></li>
     </ul>
     <p class="footer-copy">© 2025 [Your Name]. Built with purpose.</p>
   </div>
 </footer>
 
 <!-- ═══════════════ Scripts ═══════════════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Scroll reveal animation
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -1389,15 +1392,4 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Close mobile nav on link click
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    document.querySelector('.nav-links').classList.remove('open');
-  });
-});
-</script>
-
-</body>
-</html>
+document.querySelectorAll('.reveal').forEach(e
