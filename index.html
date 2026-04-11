@@ -405,20 +405,33 @@
     }
 
     /* ══════════════════════════════════════
-   ToneCheck Project Section
+   Works Section
    ══════════════════════════════════════ */
-    .tonecheck-showcase {
+    .works-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
     }
 
-    .tonecheck-visual {
+    .work-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 1rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s var(--ease-out);
+    }
+
+    .work-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(201, 169, 110, 0.25);
+      transform: translateY(-4px);
+    }
+
+    .work-cover {
+      aspect-ratio: 16 / 10;
+      background: var(--bg-secondary);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -426,14 +439,19 @@
       overflow: hidden;
     }
 
-    .tonecheck-visual img {
+    .work-cover img {
       width: 100%;
-      height: auto;
-      border-radius: 8px;
+      height: 100%;
+      object-fit: cover;
       display: block;
+      transition: transform 0.6s var(--ease-out);
     }
 
-    .tonecheck-visual::before {
+    .work-card:hover .work-cover img {
+      transform: scale(1.03);
+    }
+
+    .work-cover::after {
       content: '';
       position: absolute;
       inset: 0;
@@ -441,27 +459,38 @@
       pointer-events: none;
     }
 
-    .tonecheck-placeholder {
+    .work-cover-placeholder {
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
-      text-align: center;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
       z-index: 1;
     }
 
-    .tonecheck-info h3 {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
+    .work-body {
+      padding: 1.75rem 1.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
-    .tonecheck-info p {
+    .work-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .work-desc {
       color: var(--text-secondary);
       margin-bottom: 1.5rem;
-      font-size: 1rem;
+      font-size: 0.96rem;
+      line-height: 1.75;
+      flex: 1;
     }
 
-    .tonecheck-links {
+    .work-links {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
@@ -699,59 +728,6 @@
     }
 
     /* ══════════════════════════════════════
-   ComfyUI Section
-   ══════════════════════════════════════ */
-    .comfyui-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .comfyui-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: all 0.4s var(--ease-out);
-    }
-
-    .comfyui-card:hover {
-      border-color: rgba(201, 169, 110, 0.3);
-      transform: translateY(-4px);
-    }
-
-    .comfyui-image {
-      aspect-ratio: 1;
-      background: var(--bg-secondary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .comfyui-image-placeholder {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .comfyui-body {
-      padding: 1.2rem;
-    }
-
-    .comfyui-model {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--accent);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.4rem;
-    }
-
-    .comfyui-caption {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-    }
-
-    /* ══════════════════════════════════════
    Footer
    ══════════════════════════════════════ */
     .footer {
@@ -873,8 +849,9 @@
         gap: 2rem;
       }
 
-      .tonecheck-showcase {
+      .works-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
       }
 
       .gallery-grid {
@@ -901,10 +878,6 @@
       .hero-name {
         font-size: 2rem;
       }
-
-      .comfyui-grid {
-        grid-template-columns: 1fr;
-      }
     }
   </style>
 </head>
@@ -921,9 +894,8 @@
       </button>
       <ul class="nav-links">
         <li><a href="#about">AboutMe 关于我 </a></li>
-        <li><a href="#tonecheck">ToneCheck 同调</a></li>
+        <li><a href="#works">Works 作品</a></li>
         <li><a href="#localization">Localization 项目经历</a></li>
-        <!--<li><a href="#comfyui">AI Art 作品示例</a></li>-->
       </ul>
     </div>
   </nav>
@@ -1003,39 +975,63 @@
     </div>
   </section>
 
-  <!-- ═══════════════ ToneCheck ═══════════════ -->
+  <!-- ═══════════════ Works ═══════════════ -->
   <div class="divider">
     <hr>
   </div>
-  <section class="section" id="tonecheck">
+  <section class="section" id="works">
     <div class="reveal">
-      <p class="section-label">02 — Featured Project</p>
-      <h2 class="section-title">ToneCheck 同调</h2>
+      <p class="section-label">02 — Works</p>
+      <h2 class="section-title">作品</h2>
       <p class="section-desc">
-        面向游戏本地化的 AI 语言质量检查工具，独立设计开发，持续迭代中。
+        独立开发或主导设计的项目，涵盖 AI 工具、交互 Demo 等方向，持续更新中。
       </p>
     </div>
-    <div class="tonecheck-showcase reveal">
-      <div class="tonecheck-visual">
-        <img src="images/ToneCheck.png" alt="ToneCheck 同调">
-      </div>
-      <div class="tonecheck-info">
-        <div class="feature-tags">
-          <span class="tag">AI Coding</span>
-          <span class="tag">Localization QA</span>
-          <span class="tag">独立项目</span>
+    <div class="works-grid reveal">
+
+      <!-- ── ToneCheck ── -->
+      <div class="work-card">
+        <div class="work-cover">
+          <img src="images/ToneCheck.png" alt="ToneCheck 同调">
         </div>
-        <h3>核心功能</h3>
-        <p>
-          在游戏本地化流程中，译文的语气一致性和术语规范性很难靠人工逐条排查。ToneCheck 的出发点就是用 AI
-          辅助解决这个问题——对译文进行语气层面的质量检查（LQA），标记风格不一致、语气偏差。目前仍在持续迭代中。
-        </p>
-        <div class="tonecheck-links">
-          <a href="https://tonecheck.cn" target="_blank" class="btn btn-primary">
-            访问 tonecheck.cn
-          </a>
+        <div class="work-body">
+          <div class="feature-tags">
+            <span class="tag">AI Coding</span>
+            <span class="tag">Localization QA</span>
+            <span class="tag">独立项目</span>
+          </div>
+          <h3 class="work-title">ToneCheck 同调</h3>
+          <p class="work-desc">
+            面向游戏本地化的 AI 语言质量检查工具。游戏本地化流程中，译文的语气一致性和术语规范性很难靠人工逐条排查——ToneCheck 的出发点是用 AI
+            辅助对译文进行语气层面的质量检查（LQA），标记风格不一致与语气偏差。独立设计开发，持续迭代中。
+          </p>
+          <div class="work-links">
+            <a href="https://tonecheck.cn" target="_blank" class="btn btn-primary">访问 tonecheck.cn</a>
+          </div>
         </div>
       </div>
+
+      <!-- ── Gravity Flip ── TODO: 补一张封面图 -->
+      <div class="work-card">
+        <div class="work-cover">
+          <span class="work-cover-placeholder">[ Gravity Flip ]</span>
+        </div>
+        <div class="work-body">
+          <div class="feature-tags">
+            <span class="tag">Unity 6</span>
+            <span class="tag">2.5D Platformer</span>
+            <span class="tag">学习项目</span>
+          </div>
+          <h3 class="work-title">Gravity Flip</h3>
+          <p class="work-desc">
+            用 Unity 6 + URP 做的 2.5D 精确平台跳跃 demo。核心设计只有一条——玩家只有「翻转重力」一个能力，没有跳跃、没有冲刺，每一关设有固定的翻转次数上限，把动作游戏做出了解谜的节奏。共 5 关，从机制引入到综合挑战逐步推进。视觉借鉴 Limbo / Inside 的黑白剪影风，全部用 Unity 原始几何体搭建，不依赖外部美术资源。
+          </p>
+          <div class="work-links">
+            <a href="https://github.com/Ulaire2/GravityFlip/releases/tag/v0.1" target="_blank" class="btn btn-outline">下载 Windows 构建</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1461,54 +1457,6 @@
 
     </div>
   </section>
-
-  <!-- ═══════════════ ComfyUI Works ═══════════════ -->
-  <!--<div class="divider">
-    <hr>
-  </div>
-  <section class="section" id="comfyui">
-    <div class="reveal">
-      <p class="section-label">04 — AI Creative</p>
-      <h2 class="section-title">AI 生成作品</h2>
-      <p class="section-desc">
-        基于 ComfyUI 的游戏题材 AI 图像创作，使用 Flux Klein 与 Z-Image 模型，
-        展示对 AI 工作流的深度理解与实际操作能力。
-      </p>
-    </div>
-    <div class="comfyui-grid reveal">
-
-      <div class="comfyui-card">
-        <div class="comfyui-image">
-          <span class="comfyui-image-placeholder">[ 作品 1 ]</span>
-        </div>
-        <div class="comfyui-body">
-          <p class="comfyui-model">Flux Klein · [工作流名称]</p>
-          <p class="comfyui-caption">[简要描述：题材、提示词策略、后处理手段]</p>
-        </div>
-      </div>
-
-      <div class="comfyui-card">
-        <div class="comfyui-image">
-          <span class="comfyui-image-placeholder">[ 作品 2 ]</span>
-        </div>
-        <div class="comfyui-body">
-          <p class="comfyui-model">Z-Image · [工作流名称]</p>
-          <p class="comfyui-caption">[简要描述]</p>
-        </div>
-      </div>
-
-      <div class="comfyui-card">
-        <div class="comfyui-image">
-          <span class="comfyui-image-placeholder">[ 作品 3 ]</span>
-        </div>
-        <div class="comfyui-body">
-          <p class="comfyui-model">[模型] · [工作流名称]</p>
-          <p class="comfyui-caption">[简要描述]</p>
-        </div>
-      </div>
-
-    </div>
-  </section>-->
 
   <!-- ═══════════════ Footer ═══════════════ -->
   <footer class="footer">
